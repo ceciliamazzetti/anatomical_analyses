@@ -1,0 +1,15 @@
+!/bin/bash
+cd ... ; #cd to MRIs location where 'subject' files located, with inside defaced mri files
+
+for subn in subject* ; do
+fname=${subn}; #extract name of subject folder
+subnumber=${fname//[!0-9]/}; 
+
+	echo -e "In folder subject $subnumber  \n\n"
+	#mri_info --orientation ${fname}/defaced_mri.nii.gz  #first run this and check they have all same orientation info
+	mri_convert --in_orientation PSL ${fname}/defaced_mri.nii.gz ${fname}/flipped_LR_fresurfer.nii.gz
+done
+
+#STEP 2
+## SEGMENTATION OF FLIPPED AND UNFLIPPED AND SAVE RESULTS INTO OUTPUT FLIPPED AND OUTPUT UNFLIPPED CSV FILE
+
